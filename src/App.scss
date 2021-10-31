@@ -1,0 +1,10 @@
+.app-main-container{
+  display: flex;
+  flex-direction: column;
+  padding-top: 65px;
+
+  .drawer-image-container{
+    display: flex;
+    flex-direction: row;
+  }
+}
