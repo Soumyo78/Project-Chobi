@@ -15,7 +15,7 @@ const NavbarComponent = () => {
             component="div"
             style={{ fontWeight: "bold" }}
           >
-            ছবি (Chobi) - Photo Editor
+            ছবি (Chobi) - A Simple Photo Editor
           </Typography>
         </Toolbar>
       </AppBar>
