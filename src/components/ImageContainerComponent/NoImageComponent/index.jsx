@@ -8,7 +8,9 @@ const Input = styled("input")({
   display: "none",
 });
 
-const NoImageComponent = () => {
+const NoImageComponent = (props) => {
+  const { onChange } = props;
+
   return (
     <div className="no-image-main-container">
       <h2>Select an image to edit.</h2>
@@ -20,6 +22,7 @@ const NoImageComponent = () => {
             id="contained-button-file"
             multiple
             type="file"
+            onChange={onChange}
           />
           <Button variant="contained" component="span" id="open-image-button">
             <div className="image-button-container">

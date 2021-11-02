@@ -1,4 +1,52 @@
 .image-main-container {
   flex: 1;
   padding: 20px;
+
+  .image-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .image-with-btn-container {
+      position: relative;
+
+      #uploaded-pic {
+        width: auto;
+        max-width: 50vw;
+        height: auto;
+        max-height: 80vh;
+        opacity: 1;
+        display: block;
+        transition: 0.5s ease;
+        backface-visibility: hidden;
+      }
+
+      .btn-container {
+        transition: 0.5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      #uploaded-pic:hover {
+        .btn-container {
+          position: absolute;
+          top: 60%;
+          left: 60%;
+        }
+      }
+    }
+
+    .image-with-btn-container:hover #uploaded-pic{
+      opacity: 0.3;
+    }
+
+    .image-with-btn-container:hover .btn-container{
+      opacity: 1;
+    }
+  }
 }
