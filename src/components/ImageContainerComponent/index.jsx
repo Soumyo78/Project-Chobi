@@ -5,6 +5,7 @@ import { ReactComponent as LoadingImage } from "../../resources/loading-pic.svg"
 import { Button, Stack } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getDateTime } from "../../global";
 
 const ImageContainerComponent = () => {
   const imgHandler = (e) => {
@@ -13,6 +14,13 @@ const ImageContainerComponent = () => {
       if (reader.readyState === 1) {
         setUploadedImg(<LoadingImage />);
       }
+
+      const onDownload = () => {
+        const link = document.createElement("a");
+        link.download = `chobi_${getDateTime()}`;
+        link.href = document.getElementById("uploaded-pic").src;
+        link.click();
+      };
 
       if (reader.readyState === 2) {
         setUploadedImg(
@@ -34,6 +42,7 @@ const ImageContainerComponent = () => {
                   variant="contained"
                   endIcon={<FontAwesomeIcon icon={faDownload} />}
                   color="success"
+                  onClick={onDownload}
                 >
                   Download
                 </Button>
