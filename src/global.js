@@ -25,8 +25,18 @@ const getDateTime = () => {
     second = "0" + second;
   }
   let dateTime =
-    year + "-" + month + "-" + day + "_" + hour + "_" + minute + "_" + second;
+    year + "-" + month + "-" + day + "_" + hour + "." + minute + "." + second;
   return dateTime;
 };
 
-export { getDateTime };
+// Method for downloading the image
+const onDownload = (file_name, id) => {
+  // We have to pass the file_name and id for downloading an image
+  const link = document.createElement("a");
+  link.download = file_name;
+  link.href = document.getElementById(id).src;
+  link.click();
+};
+
+// Named export of functions
+export { getDateTime, onDownload };

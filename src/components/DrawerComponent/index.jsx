@@ -1,4 +1,7 @@
+// Importing resources
 import "./style.scss";
+
+// Importing resources
 import {
   Drawer,
   ListItem,
@@ -24,6 +27,7 @@ import {
 
 const drawerWidth = 200;
 
+// Functional component
 const DrawerComponent = () => {
   return (
     <div className="drawer-main-container">
@@ -95,4 +99,5 @@ const DrawerComponent = () => {
   );
 };
 
+// Default export of the component
 export default DrawerComponent;
