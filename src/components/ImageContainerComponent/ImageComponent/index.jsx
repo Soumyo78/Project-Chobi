@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 // Importing the components
-import { getDateTime, onDownload } from "../../../global";
+import { getDateTime, onDownload, get_confirmation } from "../../../global";
 import SliderComponent from "../../SliderComponent";
 
 // Importing redux stuffs
@@ -21,13 +21,26 @@ import { deleteImageAction } from "../../../redux/ImageContainerComponent/imageC
 import LoadingImage from "../../../resources/loading-pic.gif";
 
 const ImageComponent = (props) => {
+  const { deleteImage, read_image_file } = props;
+
   // Creating useState for uploaded image
   const [uploadImg, setUploadImg] = useState(LoadingImage); // Default image has been set to loading image
-  const { deleteImage, read_image_file } = props;
 
   // Changing the loading image with uploaded image
   useEffect(() => {
     setUploadImg(read_image_file.result);
+    document
+      .getElementById("brightness-drawer-item")
+      .classList.add("selected-active");
+
+    // Getting all the elements of class name 'app-drawer-item'
+    let elements = document.getElementsByClassName("app-drawer-item");
+    // setting pointer events visible for each element
+    for (let i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      element.style.pointerEvents = "visible";
+      element.style.opacity = 1;
+    }
   }, [read_image_file]);
 
   return (
@@ -39,7 +52,7 @@ const ImageComponent = (props) => {
             <Button
               variant="contained"
               startIcon={<FontAwesomeIcon icon={faTrash} />}
-              onClick={deleteImage}
+              onClick={() => get_confirmation(deleteImage)}
               color="error"
             >
               Delete

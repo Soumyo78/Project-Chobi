@@ -1,0 +1,28 @@
+// Importing global scss
+@import "../../global.scss";
+
+.drawer-main-container {
+  .app-drawer-item {
+    opacity:0.6;
+    pointer-events: none;
+  }
+
+  .selected-active {
+    cursor: pointer;
+    background-color: $primaryUIColor;
+    color: $primaryWhite;
+    border-radius: 0px 6px 6px 0px;
+
+    .font-awesome-icon {
+      color: $primaryWhite;
+    }
+  }
+
+  .selected-active:hover{
+    color: $primaryUIColor;
+
+    .font-awesome-icon {
+      color: $primaryUIColor;
+    }
+  }
+}
