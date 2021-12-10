@@ -38,5 +38,13 @@ const onDownload = (file_name, id) => {
   link.click();
 };
 
+// Method for create a confirmation box before doing some action
+const get_confirmation = (method) => {
+  let r = window.confirm("Are you sure want delete the image?");
+  if (r === true) {
+    method();
+  }
+};
+
 // Named export of functions
-export { getDateTime, onDownload };
+export { getDateTime, onDownload, get_confirmation };
