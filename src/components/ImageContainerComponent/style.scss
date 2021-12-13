@@ -6,13 +6,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    .image-with-btn-container:hover #uploaded-pic {
-      opacity: 0.3;
-    }
-
-    .image-with-btn-container:hover .btn-container {
-      opacity: 1;
-    }
   }
 }

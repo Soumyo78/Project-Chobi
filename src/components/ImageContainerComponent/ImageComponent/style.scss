@@ -23,6 +23,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
+      top: 90%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       text-align: center;
@@ -35,5 +36,9 @@
         left: 60%;
       }
     }
+  }
+
+  .image-with-btn-container:hover .btn-container {
+    opacity: 1;
   }
 }

@@ -1,5 +1,7 @@
 // This is a global file for javascript across the project
 
+import domtoimage from "dom-to-image";
+
 // to get current timestamp
 const getDateTime = () => {
   let now = new Date();
@@ -30,12 +32,26 @@ const getDateTime = () => {
 };
 
 // Method for downloading the image
-const onDownload = (file_name, id) => {
-  // We have to pass the file_name and id for downloading an image
-  const link = document.createElement("a");
-  link.download = file_name;
-  link.href = document.getElementById(id).src;
-  link.click();
+const onDownload = (imageFormat, fileName, id) => {
+  let node = document.getElementById(id);
+
+  if (imageFormat === "jpeg") {
+    domtoimage.toJpeg(node).then(function (dataUrl) {
+      var link = document.createElement("a");
+      link.download = `${fileName}.jpeg`;
+      link.href = dataUrl;
+      link.click();
+    });
+  }
+
+  if (imageFormat === "png") {
+    domtoimage.toPng(node).then(function (dataUrl) {
+      var link = document.createElement("a");
+      link.download = `${fileName}.png`;
+      link.href = dataUrl;
+      link.click();
+    });
+  }
 };
 
 // Method for create a confirmation box before doing some action
