@@ -35,6 +35,7 @@ const getDateTime = () => {
 const onDownload = (imageFormat, fileName, id) => {
   let node = document.getElementById(id);
 
+  // Downloading image as jpeg format
   if (imageFormat === "jpeg") {
     domtoimage.toJpeg(node).then(function (dataUrl) {
       var link = document.createElement("a");
@@ -44,6 +45,7 @@ const onDownload = (imageFormat, fileName, id) => {
     });
   }
 
+  // Downloading image as png format
   if (imageFormat === "png") {
     domtoimage.toPng(node).then(function (dataUrl) {
       var link = document.createElement("a");
