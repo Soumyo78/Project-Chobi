@@ -10,8 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 // Importing the components
-import { getDateTime, onDownload, get_confirmation } from "../../../global";
+import { get_confirmation } from "../../../global";
 import SliderComponent from "../../SliderComponent";
+import ModalComponent from "../../ModalComponent";
 
 // Importing redux stuffs
 import { useSelector, useDispatch } from "react-redux";
@@ -33,6 +34,9 @@ const ImageComponent = () => {
 
   // Creating useState for uploaded image
   const [uploadImg, setUploadImg] = useState(LoadingImage); // Default image has been set to loading image
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
 
   // Changing the loading image with uploaded image
   useEffect(() => {
@@ -71,14 +75,13 @@ const ImageComponent = () => {
               variant="contained"
               endIcon={<FontAwesomeIcon icon={faDownload} />}
               color="success"
-              onClick={() =>
-                onDownload(`chobi_${getDateTime()}`, "uploaded-pic")
-              }
+              onClick={handleModalOpen}
             >
               Download
             </Button>
           </Stack>
         </div>
+        <ModalComponent modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </div>
 
       {/* Rendering conditionally according to selected option */}
