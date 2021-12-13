@@ -5,6 +5,7 @@
   .app-drawer-item {
     opacity:0.6;
     pointer-events: none;
+    transition: color 150ms;
   }
 
   .selected-active {
@@ -20,6 +21,7 @@
 
   .selected-active:hover{
     color: $primaryUIColor;
+    background-color: $primaryWhite;
 
     .font-awesome-icon {
       color: $primaryUIColor;

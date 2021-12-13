@@ -14,14 +14,22 @@ import { getDateTime, onDownload, get_confirmation } from "../../../global";
 import SliderComponent from "../../SliderComponent";
 
 // Importing redux stuffs
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteImageAction } from "../../../redux/ImageContainerComponent/imageComponentActions";
 
 //Importing resources
 import LoadingImage from "../../../resources/loading-pic.gif";
 
-const ImageComponent = (props) => {
-  const { deleteImage, read_image_file } = props;
+const ImageComponent = () => {
+  const dispatch = useDispatch();
+
+  // Getting states
+  const read_image_file = useSelector(
+    (state) => state.imageComponentReducer.read_image_file
+  );
+  const drawerOptionState = useSelector(
+    (state) => state.drawerComponentReducer
+  );
 
   // Creating useState for uploaded image
   const [uploadImg, setUploadImg] = useState(LoadingImage); // Default image has been set to loading image
@@ -46,13 +54,15 @@ const ImageComponent = (props) => {
   return (
     <div className="image-btn-slider-main-container">
       <div className="image-with-btn-container">
-        <img src={uploadImg} alt="selected" id="uploaded-pic" />
+        <img src={uploadImg} alt="selected" id="uploaded-pic" style={{filter: "brightness(200%)"}} />
         <div className="btn-container">
           <Stack direction="row" spacing={2}>
             <Button
               variant="contained"
               startIcon={<FontAwesomeIcon icon={faTrash} />}
-              onClick={() => get_confirmation(deleteImage)}
+              onClick={() =>
+                get_confirmation(() => dispatch(deleteImageAction()))
+              }
               color="error"
             >
               Delete
@@ -70,21 +80,62 @@ const ImageComponent = (props) => {
           </Stack>
         </div>
       </div>
-      <SliderComponent />
+
+      {/* Rendering conditionally according to selected option */}
+      {drawerOptionState.selectedOption === "brightness" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState.options[0].value}
+          minValue={drawerOptionState.options[0].range.min}
+          maxValue={drawerOptionState.options[0].range.max}
+          unit={drawerOptionState.options[0].unit}
+        />
+      ) : drawerOptionState.selectedOption === "contrast" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState.options[1].value}
+          minValue={drawerOptionState.options[1].range.min}
+          maxValue={drawerOptionState.options[1].range.max}
+          unit={drawerOptionState.options[1].unit}
+        />
+      ) : drawerOptionState.selectedOption === "saturation" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState.options[2].value}
+          minValue={drawerOptionState.options[2].range.min}
+          maxValue={drawerOptionState.options[2].range.max}
+          unit={drawerOptionState.options[2].unit}
+        />
+      ) : drawerOptionState.selectedOption === "grayscale" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState.options[3].value}
+          minValue={drawerOptionState.options[3].range.min}
+          maxValue={drawerOptionState.options[3].range.max}
+          unit={drawerOptionState.options[3].unit}
+        />
+      ) : drawerOptionState.selectedOption === "sepia" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState[4].value}
+          minValue={drawerOptionState[4].range.min}
+          maxValue={drawerOptionState[4].range.max}
+          unit={drawerOptionState.options[4].unit}
+        />
+      ) : drawerOptionState.selectedOption === "hue-rotate" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState.options[5].value}
+          minValue={drawerOptionState.options[5].range.min}
+          maxValue={drawerOptionState.options[5].range.max}
+          unit={drawerOptionState.options[5].unit}
+        />
+      ) : drawerOptionState.selectedOption === "blur" ? (
+        <SliderComponent
+          defaultValue={drawerOptionState.options[6].value}
+          minValue={drawerOptionState.options[6].range.min}
+          maxValue={drawerOptionState.options[6].range.max}
+          unit={drawerOptionState.options[6].unit}
+        />
+      ) : (
+        <SliderComponent defaultValue={50} minValue={0} maxValue={100} />
+      )}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    read_image_file: state.read_image_file,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteImage: () => dispatch(deleteImageAction()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageComponent);
+export default ImageComponent;

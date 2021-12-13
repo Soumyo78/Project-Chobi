@@ -4,6 +4,18 @@ import "./style.scss";
 // Importing react stuffs
 import ReactDOM from "react-dom";
 
+// Importing redux stuffs
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeBrightnessAction,
+  changeContrastAction,
+  changeSaturationAction,
+  changeGrayscaleAction,
+  changeSepiaAction,
+  changeHueRotateAction,
+  changeBlurAction,
+} from "../../redux/DrawerComponent/drawerComponentActions";
+
 // Importing resources
 import {
   Drawer,
@@ -32,6 +44,12 @@ const drawerWidth = 200;
 
 // Functional component
 const DrawerComponent = () => {
+  const dispatch = useDispatch();
+
+  const appBarOptions = useSelector(
+    (state) => state.drawerComponentReducer.options
+  );
+
   const onClickAppBarItem = (e) => {
     // Getting the element with class name 'selected-active' and remove the class
     ReactDOM.findDOMNode(
@@ -41,6 +59,8 @@ const DrawerComponent = () => {
     // Applying the class 'selected-active' to the target element
     let element = e.currentTarget;
     element.classList.add("selected-active");
+
+    console.log(document.querySelector(".selected-active").id)
   };
 
   return (
@@ -59,23 +79,15 @@ const DrawerComponent = () => {
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           <List>
-            {[
-              "Brightness",
-              "Contrast",
-              "Saturation",
-              "Grayscale",
-              "Sepia",
-              "Hue Rotate",
-              "Blur",
-            ].map((text, index) => (
+            {appBarOptions.map((optionItem, index) => (
               <ListItem
                 button
-                key={text}
-                id={`${text.toLowerCase()}-drawer-item`}
+                key={optionItem.property}
+                id={`${optionItem.property.toLowerCase()}-drawer-item`}
                 onClick={onClickAppBarItem}
                 className={"app-drawer-item"}
               >
-                <ListItemIcon>
+                <ListItemIcon disabled={true}>
                   {index === 0 ? (
                     <FontAwesomeIcon
                       icon={faSun}
@@ -118,7 +130,7 @@ const DrawerComponent = () => {
                     />
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={optionItem.name} />
               </ListItem>
             ))}
           </List>
