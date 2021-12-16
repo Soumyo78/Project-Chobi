@@ -16,9 +16,6 @@ import {
   changeBlurAction,
 } from "../../redux/SliderComponent/sliderComponentActions";
 
-// Importing components
-import { drawerItems } from "../DrawerComponent/drawerItems";
-
 // Functional component
 const SliderComponent = (props) => {
   const { selectedOptionIndex } = props;
