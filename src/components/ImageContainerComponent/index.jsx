@@ -2,16 +2,16 @@
 import "./style.scss";
 
 // Importing redux stuffs
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 // Functional component
-const ImageContainerComponent = (props) => {
-  const { imageHolderComponent} = props;
+const ImageContainerComponent = () => {
+  const imageHolderComponent = useSelector(state => state.imageComponentReducer.imageHolderComponent)
 
   // It will show a warning alert every time user wants to leave or reload the page
-  window.onbeforeunload = function () {
-    return "Image will be lost if you leave the page, are you sure?";
-  };
+  // window.onbeforeunload = function () {
+  //   return "Image will be lost if you leave the page, are you sure?";
+  // };
 
   return (
     <div className="image-main-container">
@@ -20,12 +20,5 @@ const ImageContainerComponent = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    imageHolderComponent: state.imageHolderComponent,
-  };
-};
-
-
 // Default export of the component
-export default connect(mapStateToProps)(ImageContainerComponent);
+export default ImageContainerComponent;

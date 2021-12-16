@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 
 // Importing redux stuffs
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openImageAction } from "../../../redux/ImageContainerComponent/imageComponentActions";
 
 const Input = styled("input")({
@@ -16,15 +16,15 @@ const Input = styled("input")({
 });
 
 // Functional component
-const NoImageComponent = (props) => {
-  const { openImage } = props;
+const NoImageComponent = () => {
+  const dispatch = useDispatch();
 
   // For opening an image file
   const imgHandler = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        openImage(reader);
+        dispatch(openImageAction(reader));
       }
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -55,17 +55,5 @@ const NoImageComponent = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    read_image_file: state.read_image_file,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    openImage: (readImageFile) => dispatch(openImageAction(readImageFile)),
-  };
-};
-
 // Default export of the component
-export default connect(mapStateToProps, mapDispatchToProps)(NoImageComponent);
+export default NoImageComponent;

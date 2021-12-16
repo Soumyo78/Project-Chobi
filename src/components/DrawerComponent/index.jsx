@@ -4,6 +4,18 @@ import "./style.scss";
 // Importing react stuffs
 import ReactDOM from "react-dom";
 
+// Importing redux stuffs
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectBrightnessAction,
+  selectContrastAction,
+  selectSaturationAction,
+  selectGrayscaleAction,
+  selectSepiaAction,
+  selectHueRotateAction,
+  selectBlurAction,
+} from "../../redux/DrawerComponent/drawerComponentActions";
+
 // Importing resources
 import {
   Drawer,
@@ -32,6 +44,12 @@ const drawerWidth = 200;
 
 // Functional component
 const DrawerComponent = () => {
+  const dispatch = useDispatch();
+
+  const appBarOptions = useSelector(
+    (state) => state.drawerComponentReducer.options
+  );
+
   const onClickAppBarItem = (e) => {
     // Getting the element with class name 'selected-active' and remove the class
     ReactDOM.findDOMNode(
@@ -41,6 +59,33 @@ const DrawerComponent = () => {
     // Applying the class 'selected-active' to the target element
     let element = e.currentTarget;
     element.classList.add("selected-active");
+
+    switch (document.querySelector(".selected-active").id) {
+      case "brightness-drawer-item":
+        dispatch(selectBrightnessAction());
+        break;
+      case "contrast-drawer-item":
+        dispatch(selectContrastAction());
+        break;
+      case "saturate-drawer-item":
+        dispatch(selectSaturationAction());
+        break;
+      case "grayscale-drawer-item":
+        dispatch(selectGrayscaleAction());
+        break;
+      case "sepia-drawer-item":
+        dispatch(selectSepiaAction());
+        break;
+      case "hue-rotate-drawer-item":
+        dispatch(selectHueRotateAction());
+        break;
+      case "blur-drawer-item":
+        dispatch(selectBlurAction());
+        break;
+      default:
+        console.log("This is the default case for drawer component.")
+        break;
+    }
   };
 
   return (
@@ -59,23 +104,15 @@ const DrawerComponent = () => {
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           <List>
-            {[
-              "Brightness",
-              "Contrast",
-              "Saturation",
-              "Grayscale",
-              "Sepia",
-              "Hue Rotate",
-              "Blur",
-            ].map((text, index) => (
+            {appBarOptions.map((optionItem, index) => (
               <ListItem
                 button
-                key={text}
-                id={`${text.toLowerCase()}-drawer-item`}
+                key={optionItem.property}
+                id={`${optionItem.property.toLowerCase()}-drawer-item`}
                 onClick={onClickAppBarItem}
                 className={"app-drawer-item"}
               >
-                <ListItemIcon>
+                <ListItemIcon disabled={true}>
                   {index === 0 ? (
                     <FontAwesomeIcon
                       icon={faSun}
@@ -118,7 +155,7 @@ const DrawerComponent = () => {
                     />
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={optionItem.name} />
               </ListItem>
             ))}
           </List>

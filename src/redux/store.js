@@ -2,15 +2,12 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 
-// Importing the reducers
-import imageComponentReducer from "./ImageContainerComponent/imageComponentReducer";
+// Importing the root reducer
+import rootReducer from "./rootReducer";
 
 // Store Creator Function
 const storeCreator = () => {
-  return createStore(
-    imageComponentReducer,
-    applyMiddleware(logger)
-  );
+  return createStore(rootReducer, applyMiddleware(logger));
 };
 
 // Default export of store creator function

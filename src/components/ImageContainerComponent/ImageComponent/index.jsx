@@ -15,14 +15,26 @@ import SliderComponent from "../../SliderComponent";
 import ModalComponent from "../../ModalComponent";
 
 // Importing redux stuffs
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteImageAction } from "../../../redux/ImageContainerComponent/imageComponentActions";
 
 //Importing resources
 import LoadingImage from "../../../resources/loading-pic.gif";
 
-const ImageComponent = (props) => {
-  const { deleteImage, read_image_file } = props;
+const ImageComponent = () => {
+  const dispatch = useDispatch();
+
+  // Getting states
+  const read_image_file = useSelector(
+    (state) => state.imageComponentReducer.read_image_file
+  );
+  const drawerOptionState = useSelector(
+    (state) => state.drawerComponentReducer
+  );
+
+  const sliderImagePropertyState = useSelector(
+    (state) => state.sliderComponentReducer
+  );
 
   // Creating useState for uploaded image
   const [uploadImg, setUploadImg] = useState(LoadingImage); // Default image has been set to loading image
@@ -30,7 +42,7 @@ const ImageComponent = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
 
-  // Changing the loading image with uploaded image
+  // selecting the loading image with uploaded image
   useEffect(() => {
     setUploadImg(read_image_file.result);
     document
@@ -50,13 +62,22 @@ const ImageComponent = (props) => {
   return (
     <div className="image-btn-slider-main-container">
       <div className="image-with-btn-container">
-        <img src={uploadImg} alt="selected" id="uploaded-pic" />
+        <img
+          src={uploadImg}
+          alt="selected"
+          id="uploaded-pic"
+          style={{
+            filter: `brightness(${sliderImagePropertyState.brightnessOption.value}%) contrast(${sliderImagePropertyState.contrastOption.value}%) saturate(${sliderImagePropertyState.saturationOption.value}%) grayscale(${sliderImagePropertyState.grayscaleOption.value}%) sepia(${sliderImagePropertyState.sepiaOption.value}%) hue-rotate(${sliderImagePropertyState.hueRotateOption.value}deg) blur(${sliderImagePropertyState.blurOption.value}px)`,
+          }}
+        />
         <div className="btn-container">
           <Stack direction="row" spacing={2}>
             <Button
               variant="contained"
               startIcon={<FontAwesomeIcon icon={faTrash} />}
-              onClick={() => get_confirmation(deleteImage)}
+              onClick={() =>
+                get_confirmation(() => dispatch(deleteImageAction()))
+              }
               color="error"
             >
               Delete
@@ -73,21 +94,12 @@ const ImageComponent = (props) => {
         </div>
         <ModalComponent modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </div>
-      <SliderComponent />
+      <SliderComponent
+        selectedOptionIndex={drawerOptionState.selectedOptionIndex}
+      />
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    read_image_file: state.read_image_file,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteImage: () => dispatch(deleteImageAction()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageComponent);
+// Default export of component
+export default ImageComponent;

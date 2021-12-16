@@ -1,5 +1,6 @@
 // This is a global file for javascript across the project
 
+// Importing dom-to-image library
 import domtoimage from "dom-to-image";
 
 // to get current timestamp
