@@ -45,8 +45,6 @@ const SliderComponent = (props) => {
       case 0:
         dispatch(changeBrightnessAction(target.value));
         drawerOptionState[0].value = target.value;
-        console.log(drawerOptionState[0].value);
-        console.log(drawerItems[0].value);
         break;
       case 1:
         dispatch(changeContrastAction(target.value));
