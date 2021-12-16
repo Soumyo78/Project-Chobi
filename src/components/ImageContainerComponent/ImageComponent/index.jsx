@@ -101,4 +101,5 @@ const ImageComponent = () => {
   );
 };
 
+// Default export of component
 export default ImageComponent;

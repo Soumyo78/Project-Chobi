@@ -1,3 +1,4 @@
+// Importing styles
 import "./style.scss";
 import { AppBar, Toolbar, Typography, CssBaseline } from "@mui/material";
 
@@ -23,4 +24,5 @@ const NavbarComponent = () => {
   );
 };
 
+// Default export of component
 export default NavbarComponent;

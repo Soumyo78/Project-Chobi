@@ -82,6 +82,9 @@ const DrawerComponent = () => {
       case "blur-drawer-item":
         dispatch(selectBlurAction());
         break;
+      default:
+        console.log("This is the default case for drawer component.")
+        break;
     }
   };
 

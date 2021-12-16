@@ -16,7 +16,7 @@ import {
   changeBlurAction,
 } from "../../redux/SliderComponent/sliderComponentActions";
 
-
+// Importing components
 import { drawerItems } from "../DrawerComponent/drawerItems";
 
 // Functional component
@@ -39,13 +39,14 @@ const SliderComponent = (props) => {
     }`;
   };
 
+  // Method for changing image properties on slider change
   const onSliderChange = ({ target }) => {
     switch (selectedOptionIndex) {
       case 0:
         dispatch(changeBrightnessAction(target.value));
         drawerOptionState[0].value = target.value;
-        console.log(drawerOptionState[0].value)
-        console.log(drawerItems[0].value)
+        console.log(drawerOptionState[0].value);
+        console.log(drawerItems[0].value);
         break;
       case 1:
         dispatch(changeContrastAction(target.value));
@@ -70,6 +71,9 @@ const SliderComponent = (props) => {
       case 6:
         dispatch(changeBlurAction(target.value));
         drawerOptionState[6].value = target.value;
+        break;
+      default:
+        console.log("This is the default case for slider change.")
         break;
     }
   };

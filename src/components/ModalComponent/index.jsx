@@ -1,7 +1,8 @@
+// Importing styles
 import "./style.scss";
-
 import { Box, Button, Modal } from "@mui/material";
 
+// Importing components
 import { getDateTime, onDownload } from "../../global";
 
 const style = {
@@ -55,4 +56,5 @@ const ModalComponent = (props) => {
   );
 };
 
+// Default export od component
 export default ModalComponent;
