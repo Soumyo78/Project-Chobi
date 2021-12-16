@@ -5,9 +5,6 @@ import { DELETE_IMAGE, OPEN_IMAGE } from "./imageComponentActions";
 import NoImageComponent from "../../components/ImageContainerComponent/NoImageComponent";
 import ImageComponent from "../../components/ImageContainerComponent/ImageComponent";
 
-// Importing react stuffs
-import ReactDOM from "react-dom";
-
 // Initial state
 const uploadImgInitialState = {
   read_image_file: null,
@@ -24,18 +21,8 @@ const imageComponentReducer = (state = uploadImgInitialState, action) => {
       };
 
     case DELETE_IMAGE:
-      ReactDOM.findDOMNode(
-        document.querySelector(".selected-active")
-      ).classList.remove("selected-active");
-
-      // Getting all the elements of class name 'app-drawer-item'
-      let elements = document.getElementsByClassName("app-drawer-item");
-      // setting pointer events none for each element
-      for (let i = 0; i < elements.length; i++) {
-        let element = elements[i];
-        element.style.pointerEvents = "none";
-        element.style.opacity = 0.6;
-      }
+      // Reloading the page on image delete
+      window.location.reload(true);
       return {
         read_image_file: null,
         imageHolderComponent: <NoImageComponent />,

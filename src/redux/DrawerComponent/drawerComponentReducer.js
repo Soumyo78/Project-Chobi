@@ -1,12 +1,12 @@
 // Importing actions
 import {
-  CHANGE_BRIGHTNESS,
-  CHANGE_CONTRAST,
-  CHANGE_SATURATION,
-  CHANGE_GRAYSCALE,
-  CHANGE_SEPIA,
-  CHANGE_HUE_ROTATE,
-  CHANGE_BLUR,
+  SELECT_BRIGHTNESS,
+  SELECT_CONTRAST,
+  SELECT_SATURATION,
+  SELECT_GRAYSCALE,
+  SELECT_SEPIA,
+  SELECT_HUE_ROTATE,
+  SELECT_BLUR,
 } from "../DrawerComponent/drawerComponentActions";
 
 // Importing components
@@ -16,51 +16,59 @@ import { drawerItems } from "../../components/DrawerComponent/drawerItems";
 const drawerOptionsInitialState = {
   options: drawerItems,
   selectedOption: "brightness",
+  selectedOptionIndex: 0,
 };
 
 // Reducer
 const drawerComponentReducer = (state = drawerOptionsInitialState, action) => {
   switch (action.type) {
-    case CHANGE_BRIGHTNESS:
+    case SELECT_BRIGHTNESS:
       return {
         ...state,
         selectedOption: "brightness",
+        selectedOptionIndex: 0,
       };
 
-    case CHANGE_CONTRAST:
+    case SELECT_CONTRAST:
       return {
         ...state,
         selectedOption: "contrast",
+        selectedOptionIndex: 1,
       };
 
-    case CHANGE_SATURATION:
+    case SELECT_SATURATION:
       return {
         ...state,
         selectedOption: "saturate",
+        selectedOptionIndex: 2,
       };
 
-    case CHANGE_GRAYSCALE:
+    case SELECT_GRAYSCALE:
       return {
         ...state,
         selectedOption: "grayscale",
+        selectedOptionIndex: 3,
       };
 
-    case CHANGE_SEPIA:
+    case SELECT_SEPIA:
       return {
         ...state,
         selectedOption: "sepia",
+        selectedOptionIndex: 4,
       };
 
-    case CHANGE_HUE_ROTATE:
+    case SELECT_HUE_ROTATE:
       return {
         ...state,
         selectedOption: "hue-rotate",
+        selectedOptionIndex: 5,
       };
 
-    case CHANGE_BLUR:
+    case SELECT_BLUR:
       return {
         ...state,
         selectedOption: "blur",
+        selectedOptionIndex: 6,
       };
 
     default:

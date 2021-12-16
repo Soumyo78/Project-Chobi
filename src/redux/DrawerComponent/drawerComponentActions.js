@@ -1,76 +1,76 @@
 // Action Types
-const CHANGE_BRIGHTNESS = "CHANGE_BRIGHTNESS";
-const CHANGE_CONTRAST = "CHANGE_CONTRAST";
-const CHANGE_SATURATION = "CHANGE_SATURATION";
-const CHANGE_GRAYSCALE = "CHANGE_GRAYSCALE";
-const CHANGE_SEPIA = "CHANGE_SEPIA";
-const CHANGE_HUE_ROTATE = "CHANGE_HUE_ROTATE";
-const CHANGE_BLUR = "CHANGE_BLUR";
+const SELECT_BRIGHTNESS = "SELECT_BRIGHTNESS";
+const SELECT_CONTRAST = "SELECT_CONTRAST";
+const SELECT_SATURATION = "SELECT_SATURATION";
+const SELECT_GRAYSCALE = "SELECT_GRAYSCALE";
+const SELECT_SEPIA = "SELECT_SEPIA";
+const SELECT_HUE_ROTATE = "SELECT_HUE_ROTATE";
+const SELECT_BLUR = "SELECT_BLUR";
 
 // Action Creators
-const changeBrightnessAction = () => {
+const selectBrightnessAction = () => {
   return {
-    type: CHANGE_BRIGHTNESS,
-    payload: "For changing the image brightness.",
+    type: SELECT_BRIGHTNESS,
+    payload: "For selecting the image brightness.",
   };
 };
 
-const changeContrastAction = () => {
+const selectContrastAction = () => {
   return {
-    type: CHANGE_CONTRAST,
-    payload: "For changing the image contrast.",
+    type: SELECT_CONTRAST,
+    payload: "For selecting the image contrast.",
   };
 };
 
-const changeSaturationAction = () => {
+const selectSaturationAction = () => {
   return {
-    type: CHANGE_SATURATION,
-    payload: "For changing the image saturation.",
+    type: SELECT_SATURATION,
+    payload: "For selecting the image saturation.",
   };
 };
 
-const changeGrayscaleAction = () => {
+const selectGrayscaleAction = () => {
   return {
-    type: CHANGE_GRAYSCALE,
-    payload: "For changing the image grayscale.",
+    type: SELECT_GRAYSCALE,
+    payload: "For selecting the image grayscale.",
   };
 };
 
-const changeSepiaAction = () => {
+const selectSepiaAction = () => {
   return {
-    type: CHANGE_SEPIA,
-    payload: "For changing the image sepia.",
+    type: SELECT_SEPIA,
+    payload: "For selecting the image sepia.",
   };
 };
 
-const changeHueRotateAction = () => {
+const selectHueRotateAction = () => {
   return {
-    type: CHANGE_HUE_ROTATE,
-    payload: "For changing the image hue rotate.",
+    type: SELECT_HUE_ROTATE,
+    payload: "For selecting the image hue rotate.",
   };
 };
 
-const changeBlurAction = () => {
+const selectBlurAction = () => {
   return {
-    type: CHANGE_BLUR,
-    payload: "For changing the image blur.",
+    type: SELECT_BLUR,
+    payload: "For selecting the image blur.",
   };
 };
 
 // Named export of the components
 export {
-  CHANGE_BRIGHTNESS,
-  CHANGE_CONTRAST,
-  CHANGE_SATURATION,
-  CHANGE_GRAYSCALE,
-  CHANGE_SEPIA,
-  CHANGE_HUE_ROTATE,
-  CHANGE_BLUR,
-  changeBrightnessAction,
-  changeContrastAction,
-  changeSaturationAction,
-  changeGrayscaleAction,
-  changeSepiaAction,
-  changeHueRotateAction,
-  changeBlurAction,
+  SELECT_BRIGHTNESS,
+  SELECT_CONTRAST,
+  SELECT_SATURATION,
+  SELECT_GRAYSCALE,
+  SELECT_SEPIA,
+  SELECT_HUE_ROTATE,
+  SELECT_BLUR,
+  selectBrightnessAction,
+  selectContrastAction,
+  selectSaturationAction,
+  selectGrayscaleAction,
+  selectSepiaAction,
+  selectHueRotateAction,
+  selectBlurAction,
 };

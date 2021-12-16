@@ -7,13 +7,13 @@ import ReactDOM from "react-dom";
 // Importing redux stuffs
 import { useSelector, useDispatch } from "react-redux";
 import {
-  changeBrightnessAction,
-  changeContrastAction,
-  changeSaturationAction,
-  changeGrayscaleAction,
-  changeSepiaAction,
-  changeHueRotateAction,
-  changeBlurAction,
+  selectBrightnessAction,
+  selectContrastAction,
+  selectSaturationAction,
+  selectGrayscaleAction,
+  selectSepiaAction,
+  selectHueRotateAction,
+  selectBlurAction,
 } from "../../redux/DrawerComponent/drawerComponentActions";
 
 // Importing resources
@@ -60,7 +60,29 @@ const DrawerComponent = () => {
     let element = e.currentTarget;
     element.classList.add("selected-active");
 
-    console.log(document.querySelector(".selected-active").id)
+    switch (document.querySelector(".selected-active").id) {
+      case "brightness-drawer-item":
+        dispatch(selectBrightnessAction());
+        break;
+      case "contrast-drawer-item":
+        dispatch(selectContrastAction());
+        break;
+      case "saturate-drawer-item":
+        dispatch(selectSaturationAction());
+        break;
+      case "grayscale-drawer-item":
+        dispatch(selectGrayscaleAction());
+        break;
+      case "sepia-drawer-item":
+        dispatch(selectSepiaAction());
+        break;
+      case "hue-rotate-drawer-item":
+        dispatch(selectHueRotateAction());
+        break;
+      case "blur-drawer-item":
+        dispatch(selectBlurAction());
+        break;
+    }
   };
 
   return (
