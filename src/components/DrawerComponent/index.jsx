@@ -1,8 +1,9 @@
-// Importing resources
+// Importing styles
 import "./style.scss";
 
 // Importing react stuffs
 import ReactDOM from "react-dom";
+import { useState } from "react";
 
 // Importing redux stuffs
 import { useSelector, useDispatch } from "react-redux";
@@ -40,10 +41,17 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
+// Importing components
+import AboutSectionComponent from "../aboutSectionComponent";
+
 const drawerWidth = 200;
 
 // Functional component
 const DrawerComponent = () => {
+  const [openAboutSection, setOpenAboutSection] = useState(false);
+  const handleOpenAboutSection = () => setOpenAboutSection(true);
+  const handleCloseAboutSection = () => setOpenAboutSection(false);
+
   const dispatch = useDispatch();
 
   const appBarOptions = useSelector(
@@ -83,7 +91,7 @@ const DrawerComponent = () => {
         dispatch(selectBlurAction());
         break;
       default:
-        console.log("This is the default case for drawer component.")
+        console.log("This is the default case for drawer component.");
         break;
     }
   };
@@ -161,33 +169,28 @@ const DrawerComponent = () => {
           </List>
           <Divider />
           <List>
-            {["About"].map((text, index) => (
-              <ListItem
-                button
-                key={text}
-                id={`${text.toLowerCase()}-drawer-item`}
-                onClick={onClickAppBarItem}
-                className={"app-drawer-item"}
-              >
-                <ListItemIcon>
-                  {index === 0 ? (
-                    <FontAwesomeIcon
-                      icon={faInfoCircle}
-                      className="font-awesome-icon"
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faImage}
-                      className="font-awesome-icon"
-                    />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem
+              button
+              key="about"
+              id={"about-drawer-item"}
+              onClick={handleOpenAboutSection}
+              className={"app-drawer-about"}
+            >
+              <ListItemIcon>
+                <FontAwesomeIcon
+                  icon={faInfoCircle}
+                  className="font-awesome-icon"
+                />
+              </ListItemIcon>
+              <ListItemText primary="About" />
+            </ListItem>
           </List>
         </Box>
       </Drawer>
+      <AboutSectionComponent
+        openAboutSection={openAboutSection}
+        handleCloseAboutSection={handleCloseAboutSection}
+      />
     </div>
   );
 };
